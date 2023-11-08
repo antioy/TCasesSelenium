@@ -20,13 +20,14 @@ public class TestCaseSelenium {
 
         @Test
         public void verifyTitle() {
-        ц
+         WebDriver browser;
+            browser.get("https://www.moitepari.bg/");
+
         String ActualTitle = driver.getTitle();
-        String ExpectedTitle = " Vsichko v jivota na edna jena"
+        String ExpectedTitle = "MoitePari.bg - nad 1000 finansovi produkta na edno mqsto"
         Assert.assertEquals(ActualTitle, ExpectedTitle);
         System.out.println("Assert passed");
         }
-
 
 
         @AfterTest
