@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
+
 public class LoginPageTests {
 
     WebDriver driver;
@@ -37,7 +38,7 @@ public class LoginPageTests {
 
     // In our test, we simply need to pass the data provider class to let the test know where the parameters come from:
     @Test
-
+    @Parameters(source = UserDataProvider.class)
     public void loginTest(String userName, String password) {
         driver.findElement(By.id("user-name")).sendKeys(userName);
         driver.findElement(By.id("password")).sendKeys(password);
