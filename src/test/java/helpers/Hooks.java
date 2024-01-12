@@ -1,10 +1,10 @@
-package Homework11.helpers;
-
+package helpers;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Hooks extends BrowserFactory {
+import java.time.Duration;
+public class Hooks extends  BrowserFactory{
     private WebDriverWait wait;
     @Before
     public void setUp() {
@@ -14,5 +14,6 @@ public class Hooks extends BrowserFactory {
     @After
     public void tearDown() {
         BrowserFactory.quitDriver();
+
     }
 }

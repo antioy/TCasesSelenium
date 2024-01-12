@@ -1,20 +1,20 @@
-package Homework9;
+package helpers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.time.Duration;
-
-public class Helpers {
+import java.util.concurrent.TimeUnit;
+public class BrowserFactory {
     protected WebDriver driver;
+
+    protected static void getDriver() {
+    }
+
+    protected static void quitDriver() {
+    }
 
 
     @Before
@@ -31,7 +31,7 @@ public class Helpers {
 
 
         } else if (browser.equalsIgnoreCase("edge")) {
-            System.out.println("Executing on Firefox");
+            System.out.println("Executing on Edge");
             WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
             driver.manage().window().maximize();
@@ -48,3 +48,5 @@ public class Helpers {
         driver.quit();
     }
 }
+
+
