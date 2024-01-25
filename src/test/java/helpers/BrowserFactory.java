@@ -1,52 +1,46 @@
 package helpers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 public class BrowserFactory {
-    protected WebDriver driver;
+    private static Map<String, WebDriver> drivers = new HashMap<>();
 
-    protected static void getDriver() {
-    }
+    public static WebDriver getBrowser(String browserName) {
 
-    protected static void quitDriver() {
-    }
+        WebDriver driver = null;
 
+        switch (browserName) {
+            case "Chrome":
+                driver = drivers.get("Chrome");
+                if (driver == null) {
+                    System.setProperty("webdriver.chrome.driver", "C:/Users/tsank/Downloads/driversChrome/chromedriver.exe");
 
-    @Before
-    public void setDriver() {
-
-        String browser = "chrome";
-        if (browser.equalsIgnoreCase("chrome")) {
-            System.out.println("Executing on Chrome");
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().deleteAllCookies();
-            driver.get("https://demoqa.com/text-box");
-
-
-        } else if (browser.equalsIgnoreCase("edge")) {
-            System.out.println("Executing on Edge");
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
-            driver.manage().window().maximize();
-            driver.manage().deleteAllCookies();
-            driver.get("https://www.saucedemo.com/");
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--remote-allow-origins=*");
+                    driver = new ChromeDriver(options);
+                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                    drivers.put("Chrome", driver);
+                }
+                break;
         }
-
-
+        return driver;
     }
 
-    @After
-    public void teardown() {
-
-        driver.quit();
+    public static void closeDrivers() {
+        for (String key : drivers.keySet()) {
+            drivers.get(key).close();
+        }
     }
 }
+
+    
 
 

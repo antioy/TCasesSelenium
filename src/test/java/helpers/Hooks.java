@@ -1,19 +1,19 @@
 package helpers;
-import org.junit.After;
-import org.junit.Before;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 public class Hooks extends  BrowserFactory{
-    private WebDriverWait wait;
-    @Before
-    public void setUp() {
-        BrowserFactory.getDriver();
-    }
+     public static void beforeTesting(){
+         WebDriver driver = getBrowser("Crome");
+         driver.get("https://www.saucedemo.com/");
+         driver.manage().window().maximize();
+     }
 
     @After
-    public void tearDown() {
-        BrowserFactory.quitDriver();
+    public  static void quitDriver() {
+        quitDriver();
 
     }
 }
