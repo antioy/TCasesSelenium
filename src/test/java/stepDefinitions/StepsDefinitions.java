@@ -1,32 +1,25 @@
-import java.util.concurrent.TimeUnit;
-
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.SecondPageSauceDemo;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import static helpers.Hooks.driver;
 
-public class LoginSteps {
-    WebDriver driver;
-    String baseUrl = "https://www.saucedemo.com/";
+public class StepsDefinitions {
 
-    @Given("user should be open https:\\/\\/www.saucedemo.com\\/ in web browser")
-    public void user_should_be_open_https_www_saucedemo_com_in_web_browser() throws Exception {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions opt = new ChromeOptions();
+    SecondPageSauceDemo secondPageSauceDemo;
+    HomePage homePage;
+    LoginPage loginPage;
 
-        driver = new ChromeDriver(opt);
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get(baseUrl);
+
+    @Given("The user enters the site, clicks on Login")
+    public void user_should_be_open_https_www_saucedemo_com_in_web_browser(){
+        homePage = new HomePage(driver);
     }
     @When("user input valid username and password")
     public void user_input_valid_username() throws Exception {
