@@ -1,18 +1,27 @@
+package stepDefinitions;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import pages.HomePage;
 import pages.LoginPage;
-import pages.SecondPageSauceDemo;
+
+import java.sql.Driver;
+import java.util.List;
+import java.util.Map;
+import helpers.BrowserFactory;
+import pages.HomePage;
+import pages.LoginPage;
+
+
 
 import static helpers.Hooks.driver;
 
-public class StepsDefinitions {
+public class LoginDefinitions {
 
-    SecondPageSauceDemo secondPageSauceDemo;
+
     HomePage homePage;
     LoginPage loginPage;
 

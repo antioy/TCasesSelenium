@@ -1,5 +1,6 @@
 package pages;
 
+import helpers.Hooks;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SecondPageSauceDemo {
-    public static String INVENTORY_PAGE_URL = "https://www.saucedemo.com/inventory.html";
+    public static WebDriver webDriver;
+
+    WebDriverWait wait = new WebDriverWait(Hooks.driver, (10));
 
     @FindBy(className = "bm-burger-button")
     private WebElement menuButton;

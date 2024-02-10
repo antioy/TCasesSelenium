@@ -15,7 +15,6 @@ public class Hooks {
     @Before
     public void setup() {
         ChromeOptions opt = new ChromeOptions();
-        opt.addExtensions(new File("C://extension//uBlock.crx"));
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(opt);
         driver.manage().window().maximize();

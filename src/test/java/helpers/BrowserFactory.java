@@ -1,45 +1,38 @@
 package helpers;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 public class BrowserFactory {
-    private static Map<String, WebDriver> drivers = new HashMap<>();
 
-    public static WebDriver getBrowser(String browserName) {
+    public static WebDriver driver;
 
-        WebDriver driver = null;
 
-        switch (browserName) {
-            case "Chrome":
-                driver = drivers.get("Chrome");
-                if (driver == null) {
-                    System.setProperty("webdriver.chrome.driver", "C:/Users/tsank/Downloads/driversChrome/chromedriver.exe");
+    public static WebDriver getBrowser(String browserType) {
+
+        switch (browserType) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+
 
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--remote-allow-origins=*");
-                    driver = new ChromeDriver(options);
                     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                    drivers.put("Chrome", driver);
-                }
-                break;
-        }
-        return driver;
-    }
+                    driver.manage().window().maximize();
+                    return new ChromeDriver(options);
 
-    public static void closeDrivers() {
-        for (String key : drivers.keySet()) {
-            drivers.get(key).close();
-        }
+                 default:
+                  throw new IllegalArgumentException("Unsupported browser type: " + browserType);
+       }
     }
-}
+ }
 
     
 

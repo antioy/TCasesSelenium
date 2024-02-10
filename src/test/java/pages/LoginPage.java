@@ -1,58 +1,66 @@
 package pages;
+import helpers.Hooks;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
     public class LoginPage {
 
         public static WebDriver webDriver;
+
+        WebDriverWait wait = new WebDriverWait(Hooks.driver, (10));
 
         public LoginPage(WebDriver driver){
             PageFactory.initElements(driver, this);
             webDriver = driver;
         }
 
-        @FindBy(xpath = "//input[@id='user-name']")
-        private WebElement inputUsername;
+        @FindBy(className = "login")
+        private WebElement signInButton;
 
-        @FindBy(xpath = "//input[@id='password']")
-        private WebElement inputPassword;
+        @FindBy(id= "email") private WebElement email;
+        @FindBy(id="passwd") private WebElement password;
 
-        @FindBy(xpath = "//input[@id='login-button']")
-        private WebElement buttonLogin;
+        @FindBy(id = "SubmitLogin")
+        private WebElement loginButton;
 
-        @FindBy(xpath = "//div[.='Sauce Labs Backpack']")
-        private WebElement sauceLabsBackpackItem;
-
-        @FindBy(css = "h3")
-        private WebElement errMsg;
-
-        public boolean verifyOnLoginPage(){
-            return inputUsername.isDisplayed();
+        public WebElement getLoginButton(){
+            return this.loginButton;
         }
 
-        public void setUserName(String userName){
-            inputUsername.sendKeys(userName);
+        public void clickSignInButton() {
+            signInButton.click();
         }
 
-        public void setPassword(String pwd){
-            inputPassword.sendKeys(pwd);
+        public void setEmail(String email) {
+            this.email.sendKeys(email);
         }
 
-        public void clickButtonLogin(){
-            buttonLogin.click();
+        public void setPassword(String password) {
+            this.password.sendKeys(password);
         }
 
-        public boolean loginIsSuccessful(){
-            return sauceLabsBackpackItem.isDisplayed();
+        public void clickLoginButton() {
+            loginButton.click();
         }
 
-        public String loginIsError(){
-            return errMsg.getText();
+
+        public void click(WebElement element) {
+            element.click();
         }
+        public void login(String email, String password) {
+            setEmail(email);
+            setPassword(password);
+            click(loginButton);
+        }
+
+
     }
-
 
 
 
