@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -12,8 +14,7 @@ import java.sql.Driver;
 import java.util.List;
 import java.util.Map;
 import helpers.BrowserFactory;
-import pages.HomePage;
-import pages.LoginPage;
+
 
 
 
@@ -26,9 +27,9 @@ public class LoginDefinitions {
     LoginPage loginPage;
 
 
-    @Given("The user enters the site, clicks on Login")
-    public void user_should_be_open_https_www_saucedemo_com_in_web_browser(){
-        homePage = new HomePage(driver);
+    @Given("a user is on the {string} page")
+    public void aUserIsOnThePage(String url) {
+        loginPage.navigateToUrl(url);
     }
     @When("user input valid username and password")
     public void user_input_valid_username() throws Exception {

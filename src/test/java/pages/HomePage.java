@@ -1,6 +1,7 @@
 package pages;
+import helpers.BrowserFactory;
 import helpers.Hooks;
-import org.junit.Assert;
+import org.junit.rules.Timeout;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
+public class HomePage extends BasePage{
+
 
     public static WebDriver driver;
 
@@ -32,16 +34,10 @@ public class HomePage {
     @FindBy(xpath = "//div[@class='shopping_cart']//a[@title='View my shopping cart']//span[2]") private WebElement productCart;
     @FindBy(xpath = "//div[@class='shopping_cart']//a[@title='View my shopping cart']//span[3]") private WebElement productsCart;
 
-    public HomePage(WebDriver driver) {
+    public HomePage(BrowserFactory baseDriver) {
+        super(baseDriver);
     }
 
-    public void clickTshirtMenuButton() {
-        tShirtMenuButton.click();
-    }
-
-    public void clickFadedTshirtButton() {
-        fadedTshirtButton.click();
-    }
 
     public WebElement getAddToCart() {
         return addToCartButton;

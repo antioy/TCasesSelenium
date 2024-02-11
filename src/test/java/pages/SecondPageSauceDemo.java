@@ -1,5 +1,6 @@
 package pages;
 
+import helpers.BrowserFactory;
 import helpers.Hooks;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,64 +9,33 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SecondPageSauceDemo {
+public class SecondPageSauceDemo extends BasePage {
     public static WebDriver webDriver;
 
     WebDriverWait wait = new WebDriverWait(Hooks.driver, (10));
-
-    @FindBy(className = "bm-burger-button")
-    private WebElement menuButton;
-
-    @FindBy(id = "logout_sidebar_link")
-    private WebElement logoutLink;
-
-    @FindBy(className = "add-to-cart-button")
-    private WebElement addToCart;
-
-    @FindBy(className = "shopping_cart_badge")
-    private WebElement cartItemCount;
-
-    @FindBy(id = "shopping_cart_container")
-    private WebElement cartLink;
-
-    public WebDriver driver;
-
-    public SecondPageSauceDemo(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public SecondPageSauceDemo(BrowserFactory baseDriver) {
+        super(baseDriver);
     }
 
-    public void addItemToCart() {
-        addToCart.click();
-        //should be added - but should be asserted
+    @FindBy(xpath = "//td[@class='cart_description']//p[@class='product-name']//a[contains(text(),'Faded Short Sleeve T-shirts')]")
+    private WebElement orderedItem;
+
+    @FindBy(xpath = "//td[@class='cart_description']//small//a") private WebElement itemProperties;
+
+    @FindBy(xpath = "//input[@class='cart_quantity_input form-control grey']") private WebElement orderedQuantity;
+
+
+
+    public WebElement getOrderedItem() {
+        return orderedItem;
     }
 
-    public int getItemsInCart() {
-        String text = cartItemCount.getText();
-        return Integer.parseInt(text);
+    public WebElement getItemProperties() {
+        return itemProperties;
     }
 
-    public void clickCart () {
-        cartLink.click();
-    }
-
-    public WebElement getCartItemCountElement() {
-
-        return cartItemCount;
-    }
-
-    public void logout()
-    {
-        menuButton.click();
-
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.elementToBeClickable(logoutLink));
-
-        //wait until Logout link is clickable (menu expands)
-
-        logoutLink.click();
-        //logged out (hopefully)
-
+    public WebElement getOrderedQuantity() {
+        return orderedQuantity;
     }
 
 }

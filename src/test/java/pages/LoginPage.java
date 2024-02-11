@@ -1,4 +1,5 @@
 package pages;
+import helpers.BrowserFactory;
 import helpers.Hooks;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
@@ -9,15 +10,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-    public class LoginPage {
+    public class LoginPage extends BasePage {
 
         public static WebDriver webDriver;
 
         WebDriverWait wait = new WebDriverWait(Hooks.driver, (10));
 
-        public LoginPage(WebDriver driver){
-            PageFactory.initElements(driver, this);
-            webDriver = driver;
+        public LoginPage(BrowserFactory baseDriver) {
+            super(baseDriver);
         }
 
         @FindBy(className = "login")
